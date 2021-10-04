@@ -2,11 +2,13 @@
 
 /* variables */
 :root{
-  --primary:	#db0000;
+  --primary:	#e50914;
   --secondary-light: #ffffff;
   --secondary-dark: #e6e6e6;
-  --background-dark:#000000;
+  --background-dark-1:#000000;
+  --background-dark-2:#333;
   --background-light:#564d4d;
+  --formbackground:rgba(0,0,0,.75);
   --box-shadow: 1px 2px 3px rgba(50, 50, 50, 0.05);
 }
 
@@ -14,11 +16,11 @@
   margin: 0;
   padding:0;
   font-family: 'Nunito', sans-serif;
-  color: var(--secondary-light)
+  color: var(--secondary-light);
 }
 
 body {
-  background: var(--background-dark);
+  background: var(--background-dark-1);
 }
 
 a{
@@ -29,6 +31,7 @@ a{
 
 button, .btn {
   background: var(--secondary-light);
+  color: var(--background-dark-1);
   border-radius: 8px;
   border: 0;
   padding: 8px 12px;
@@ -37,9 +40,9 @@ button, .btn {
   display: inline-block;
 }
 
-button:hover, .btn:hover {
+/* button:hover, .btn:hover {
   background: var(--secondary-dark);
-}
+} */
 
 button:disabled {
   opacity: 0.5;
@@ -50,21 +53,22 @@ button:disabled {
 /* form */
 form {
   max-width: 400px;
+  max-height: 600px;
   margin: 0 auto;
   padding: 30px;
   border-radius: 8px;
   box-shadow: var(--box-shadow);
-  border: 1px solid var(--secondary-dark);
-  background: var(--secondary-light);
+  background: var(--formbackground)
 }
 
 input, textarea {
   border: 0;
-  border-bottom: 1px solid var(--secondary-light);
+  border-bottom: 1px solid var(--background-dark-2);
   padding: 10px;
   outline: none;
   display: block;
   width: 100%;
   box-sizing: border-box;
   margin: 20px auto;
+  background: var(--background-dark-2);
 }
