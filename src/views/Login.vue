@@ -2,10 +2,11 @@
   <header></header>
   <div class="container">
     <h1>SimpleNetflix</h1>
-    <form>
+    <form @submit.prevent="handleSubmit">
       <h3>Login</h3>
       <input type="email" v-model="email" placeholder="email" />
       <input type="password" v-model="password" placeholder="password" />
+      <div v-if="error" class="error">{{ error }}</div>
       <button>Log in</button>
       <div class="info">
         <p>No Account?</p>
@@ -17,7 +18,25 @@
 </template>
 
 <script>
-export default {};
+import useLogin from "../composables/useLogin";
+import { ref } from "@vue/reactivity";
+
+export default {
+  setup() {
+    const { error, login } = useLogin();
+    const email = ref("");
+    const password = ref("");
+
+    const handleSubmit = async () => {
+      const res = await login(email.value, password.value);
+      if (!error.value) {
+        console.log("user login");
+      }
+    };
+
+    return { email, password, handleSubmit, error };
+  },
+};
 </script>
 
 <style scoped>
