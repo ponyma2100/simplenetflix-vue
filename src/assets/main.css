@@ -44,11 +44,11 @@ button, .btn {
   background: var(--secondary-dark);
 } */
 
-button:disabled {
+/* button:disabled {
   opacity: 0.5;
   background: var(--secondary-light);
   cursor: not-allowed;
-}
+} */
 
 /* form */
 form {

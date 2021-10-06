@@ -11,7 +11,7 @@
       />
       <div v-if="error" class="error">{{ error }}</div>
       <button v-if="!isPending">Log in</button>
-      <button v-if="isPending">Loading</button>
+      <button v-if="isPending" disabled>Loading</button>
       <div class="info">
         <p>No Account?</p>
         <br />
@@ -54,6 +54,11 @@ button:hover {
   filter: brightness(85%);
 }
 
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 form {
   height: 300px;
   top: 5%;
@@ -67,7 +72,7 @@ form {
 }
 .info {
   display: flex;
-  padding: 5rem 0;
+  padding: 0.5rem 0;
 }
 .info p {
   margin-right: 5px;
