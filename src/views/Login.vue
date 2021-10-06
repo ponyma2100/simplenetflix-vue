@@ -1,18 +1,21 @@
 <template>
-  <header></header>
   <div class="container">
-    <h1>SimpleNetflix</h1>
     <form @submit.prevent="handleSubmit">
       <h3>Login</h3>
-      <input type="email" v-model="email" placeholder="email" />
-      <input type="password" v-model="password" placeholder="password" />
+      <input type="email" v-model="email" placeholder="email" required />
+      <input
+        type="password"
+        v-model="password"
+        placeholder="password"
+        required
+      />
       <div v-if="error" class="error">{{ error }}</div>
       <button v-if="!isPending">Log in</button>
       <button v-if="isPending">Loading</button>
       <div class="info">
         <p>No Account?</p>
         <br />
-        <a href="#">Signup!</a>
+        <router-link :to="{ name: 'Signup' }">Signup!</router-link>
       </div>
     </form>
   </div>
@@ -41,10 +44,6 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-  color: #e50914;
-  padding: 1rem;
-}
 button {
   background: #e50914;
   color: white;
@@ -54,14 +53,21 @@ button {
 button:hover {
   filter: brightness(85%);
 }
+
+form {
+  height: 300px;
+  top: 5%;
+  position: relative;
+}
+
 .container {
-  height: 100vh;
+  height: 93vh;
   background-image: url("../../src/assets/loginbg.jpg");
   background-size: cover;
 }
 .info {
   display: flex;
-  padding: 0.5rem 0;
+  padding: 5rem 0;
 }
 .info p {
   margin-right: 5px;
