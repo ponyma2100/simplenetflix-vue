@@ -31,7 +31,6 @@ export default {
       console.log("user logged out");
       router.push({ name: "Login" });
     };
-    console.log("user", user);
     return { error, handleClick, user };
   },
 };
