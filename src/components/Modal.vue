@@ -6,17 +6,28 @@
         alt=""
       />
     </div>
-    <div class="modal-button"></div>
     <div class="modal-info">
-      <div class="title">
-        <p>{{ movie.title }}</p>
-        <p>{{ movie.name }}</p>
+      <div class="modal-button">
+        <div class="add">
+          <i class="fas fa-plus-circle"></i>
+          <i class="far fa-check-circle"></i>
+        </div>
+        <div class="like">
+          <i class="far fa-thumbs-up"></i>
+          <i class="fas fa-thumbs-up"></i>
+        </div>
+        <div class="moreinfo">
+          <i class="fas fa-chevron-circle-down"></i>
+        </div>
       </div>
-      <div class="vote">
-        <p>{{ movie.vote_average }} 平均評分</p>
-      </div>
-      <div class="description">
-        <!-- <p>{{ movie.overview }}</p> -->
+      <div class="modal-description">
+        <div class="title">
+          <p>{{ movie.title }}</p>
+          <p>{{ movie.name }}</p>
+        </div>
+        <div class="vote">
+          <p>{{ movie.vote_average }} 平均評分</p>
+        </div>
       </div>
     </div>
   </div>
@@ -45,8 +56,15 @@ export default {
   box-shadow: rgb(0 0 0 / 75%) 0px 3px 10px;
   cursor: pointer;
 }
+
+.modal-button {
+  display: flex;
+  font-size: 1.5rem;
+  padding-top: 5px;
+}
+
 .modal-info {
-  padding: 10px;
+  padding: 5px;
 }
 .modal-img {
   display: flex;
