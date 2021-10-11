@@ -6,7 +6,7 @@
   --secondary-light: #ffffff;
   --secondary-dark: #e6e6e6;
   --background-dark-1:#000000;
-  --background-dark-2:#333;
+  --background-dark-2:#181818;
   --background-light:#564d4d;
   --formbackground:rgba(0,0,0,.75);
   --box-shadow: 1px 2px 3px rgba(50, 50, 50, 0.05);
@@ -20,7 +20,7 @@
 }
 
 body {
-  background: var(--background-dark-1);
+  background: var(--background-dark-2);
 }
 
 a{

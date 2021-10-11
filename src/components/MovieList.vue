@@ -94,8 +94,8 @@ export default {
 <style scoped>
 .slide {
   width: 98vw;
-  height: 350px;
-  max-height: 250px;
+  /* height: 350px; */
+  /* max-height: 250px; */
   display: flex;
   padding: 0.5rem 0.5rem;
   overflow: scroll hidden;

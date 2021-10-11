@@ -1,13 +1,13 @@
 <template>
-  <div class="movie" v-show="!isHover" @mouseenter="handleHover">
-    <div class="img">
+  <div class="movie" @mouseenter="handleHover">
+    <div class="img" v-show="!isHover">
       <img
         :src="`https://image.tmdb.org/t/p/w300${movie.poster_path}`"
         alt=""
       />
     </div>
+    <Modal :movie="movie" v-show="isHover" @mouseleave="isHover = false" />
   </div>
-  <Modal :movie="movie" v-show="isHover" @mouseleave="handleHover" />
 </template>
 
 <script>
@@ -22,6 +22,10 @@ export default {
 
     const handleHover = (e) => {
       isHover.value = !isHover.value;
+      console.log(
+        "🚀 ~ file: SingleMovie.vue ~ line 25 ~ handleHover ~ isHover.value",
+        isHover.value
+      );
     };
 
     return { handleHover, isHover };
@@ -30,13 +34,26 @@ export default {
 </script>
 
 <style scoped>
-.movie img {
+.movie {
   height: 170px;
   width: 250px;
-  object-fit: cover;
-  margin: 3px;
+  margin: 5px;
+}
+.img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  max-height: 100%;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.movie img {
+  min-height: 100%;
+  min-width: 100%;
+  object-fit: cover;
+  border-radius: 5px;
 }
 
 button {
