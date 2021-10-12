@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import getMovie from "../composables/getMovie";
+import getMovies from "../composables/getMovies";
 import SingleMovie from "../components/SingleMovie.vue";
 import Modal from "../components/Modal.vue";
 
@@ -70,7 +70,7 @@ export default {
       comedy,
       top,
       romance,
-    } = getMovie();
+    } = getMovies();
 
     getTrend();
     getTop();
