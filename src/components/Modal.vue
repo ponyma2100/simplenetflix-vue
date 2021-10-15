@@ -16,7 +16,7 @@
           <i class="far fa-thumbs-up"></i>
           <i class="fas fa-thumbs-up"></i>
         </div>
-        <div class="moreinfo">
+        <div class="moreinfo" @click="handleClick">
           <i class="fas fa-chevron-circle-down"></i>
         </div>
       </div>
@@ -36,7 +36,14 @@
 <script>
 export default {
   props: ["movie"],
-  setup(prop) {},
+
+  setup(props, { emit }) {
+    const handleClick = (e) => {
+      emit("showDetail");
+    };
+
+    return { handleClick };
+  },
 };
 </script>
 

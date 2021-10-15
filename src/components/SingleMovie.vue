@@ -6,29 +6,51 @@
         alt=""
       />
     </div>
-    <Modal :movie="movie" v-show="isHover" @mouseleave="isHover = false" />
+    <Modal
+      :movie="movie"
+      v-show="isHover"
+      @mouseleave="isHover = false"
+      @showDetail="toggleModalDetail"
+    />
+    <ModalDetal
+      v-show="showModal"
+      :movie="movie"
+      @closeDetail="closeModalDetail"
+    />
   </div>
 </template>
 
 <script>
 import { ref } from "@vue/reactivity";
 import Modal from "../components/Modal.vue";
+import ModalDetal from "./ModalDetal.vue";
 
 export default {
   props: ["movie"],
-  components: { Modal },
-  setup(prop) {
+  components: { Modal, ModalDetal },
+  setup(props) {
     const isHover = ref(false);
+    const showModal = ref(false);
 
     const handleHover = (e) => {
       isHover.value = !isHover.value;
-      console.log(
-        "🚀 ~ file: SingleMovie.vue ~ line 25 ~ handleHover ~ isHover.value",
-        isHover.value
-      );
     };
 
-    return { handleHover, isHover };
+    const toggleModalDetail = () => {
+      showModal.value = !showModal.value;
+      isHover.value = !isHover.value;
+    };
+    const closeModalDetail = () => {
+      showModal.value = !showModal.value;
+    };
+
+    return {
+      handleHover,
+      isHover,
+      toggleModalDetail,
+      showModal,
+      closeModalDetail,
+    };
   },
 };
 </script>
