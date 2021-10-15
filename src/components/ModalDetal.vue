@@ -3,7 +3,7 @@
     <div class="modal-detail">
       <div class="modal-img">
         <img
-          :src="`https://image.tmdb.org/t/p/w300${movie.poster_path}`"
+          :src="`https://image.tmdb.org/t/p/w780${movie.backdrop_path}`"
           alt=""
         />
       </div>
@@ -19,12 +19,23 @@
           </div>
         </div>
         <div class="modal-description">
-          <div class="title">
-            <p>{{ movie.title }}</p>
-            <p>{{ movie.name }}</p>
+          <div class="movie-about">
+            <div class="title">
+              <p>{{ movie.title }}</p>
+              <p>{{ movie.name }}</p>
+            </div>
+            <div class="vote">
+              <p>{{ movie.vote_average }} 平均評分</p>
+            </div>
+            <div class="overview">
+              {{ movie.overview }}
+            </div>
           </div>
-          <div class="vote">
-            <p>{{ movie.vote_average }} 平均評分</p>
+          <div class="movie-intro">
+            <p>Casts:</p>
+            <div class="casts" v-for="cast in movieCast" :key="cast.cast_id">
+              {{ cast.name }}
+            </div>
           </div>
         </div>
       </div>
@@ -33,18 +44,21 @@
 </template>
 
 <script>
+import { ref } from "@vue/reactivity";
 import getMovie from "../composables/getMovie";
 
 export default {
   props: ["movie"],
   setup(props, { emit }) {
-    const { loadMovie } = getMovie(props.movie.id);
+    const { loadMovie, movieInfo, movieCast } = getMovie(props.movie.id);
     loadMovie();
+    console.log("🚀movieInfo", movieCast);
+
     const close = () => {
       emit("closeDetail");
     };
 
-    return { close };
+    return { close, movieInfo, movieCast };
   },
 };
 </script>
@@ -65,7 +79,7 @@ export default {
   top: 120px;
   margin: 100px auto;
   height: 90%;
-  width: 500px;
+  width: 800px;
   border-radius: 8px;
   transform: translateX(-39px) translateY(-50px) scaleX(1) scaleY(1)
     translateZ(0px);
@@ -76,6 +90,10 @@ export default {
   cursor: pointer;
 }
 
+.modal-description {
+  display: flex;
+}
+
 .modal-button {
   display: flex;
   font-size: 1.5rem;
@@ -83,12 +101,12 @@ export default {
 }
 
 .modal-info {
-  padding: 5px;
+  padding: 5px 20px;
 }
 .modal-img {
   display: flex;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   overflow: hidden;
   border-radius: 8px;
 }
@@ -106,5 +124,10 @@ export default {
 .vote p {
   color: #46d369;
   font-weight: bold;
+}
+
+.movie-about {
+  width: 70%;
+  margin-right: 20px;
 }
 </style>
