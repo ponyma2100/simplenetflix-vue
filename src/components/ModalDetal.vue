@@ -33,9 +33,13 @@
 </template>
 
 <script>
+import getMovie from "../composables/getMovie";
+
 export default {
   props: ["movie"],
   setup(props, { emit }) {
+    const { loadMovie } = getMovie(props.movie.id);
+    loadMovie();
     const close = () => {
       emit("closeDetail");
     };

@@ -10,7 +10,7 @@ const getMovie = (id) => {
   const loadMovie = async () => {
 
     try {
-      const res = await fetch(`${apiUrl}/movie/${id}?api_key=${apiKey}`)
+      const res = await fetch(`${apiUrl}/movie/${id}?api_key=${apiKey}&append_to_response=casts,recommendations`)
       const data = await res.json()
       movie.value = data
       console.log("🚀 ~ file: getMovie.js ~ line 17 ~ loadMovie ~ movie.value", movie.value)

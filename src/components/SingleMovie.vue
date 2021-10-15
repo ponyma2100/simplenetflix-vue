@@ -13,7 +13,7 @@
       @showDetail="toggleModalDetail"
     />
     <ModalDetal
-      v-show="showModal"
+      v-if="showModal"
       :movie="movie"
       @closeDetail="closeModalDetail"
     />
