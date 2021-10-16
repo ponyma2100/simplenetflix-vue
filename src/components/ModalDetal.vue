@@ -27,18 +27,34 @@
             <div class="vote">
               <p>{{ movie.vote_average }} 平均評分</p>
             </div>
+            <div class="releasedate">
+              {{ movieInfo.release_date }}
+            </div>
             <div class="overview">
               {{ movie.overview }}
             </div>
           </div>
           <div class="movie-intro">
-            <p>Casts:</p>
-            <div class="casts" v-for="cast in movieCast" :key="cast.cast_id">
-              {{ cast.name }}
+            <div class="casts">
+              <p>Casts:</p>
+              <div class="cast" v-for="cast in movieCast" :key="cast.cast_id">
+                {{ cast.name }}
+              </div>
+            </div>
+            <div class="genreses">
+              <p>Genres:</p>
+              <div
+                class="genres"
+                v-for="genres in movieInfo.genres"
+                :key="genres.id"
+              >
+                {{ genres.name }}
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <div class="modal-recommend"></div>
     </div>
   </div>
 </template>
