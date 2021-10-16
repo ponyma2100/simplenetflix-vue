@@ -16,7 +16,7 @@ const getMovie = (id) => {
       const data = await res.json()
       movieInfo.value = data
       movieCast.value = data.casts.cast.splice(0, 3)
-      movieRecommend.value = data.recommendations.results.splice(0, 10)
+      movieRecommend.value = data.recommendations.results.splice(0, 9)
 
       return movieInfo, movieCast, movieRecommend
 

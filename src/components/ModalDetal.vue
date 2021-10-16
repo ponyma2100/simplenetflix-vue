@@ -54,14 +54,27 @@
           </div>
         </div>
       </div>
+      <h2>Recommends</h2>
       <div class="modal-recommend">
         <div
           class="recommend"
           v-for="recommend in movieRecommend"
           :key="recommend.id"
         >
+          <div class="recommend-img">
+            <img
+              :src="`https://image.tmdb.org/t/p/w300${recommend.poster_path}`"
+              alt=""
+            />
+          </div>
           <div class="recommend-title">
             {{ recommend.title }}
+          </div>
+          <div class="recommend-vote">
+            <p>{{ recommend.vote_average }} 平均評分</p>
+          </div>
+          <div class="recommend-overview">
+            <p>{{ recommend.overview.substring(0, 100) + "..." }}</p>
           </div>
         </div>
       </div>
@@ -70,7 +83,7 @@
 </template>
 
 <script>
-import { ref } from "@vue/reactivity";
+import { computed } from "@vue/reactivity";
 import getMovie from "../composables/getMovie";
 
 export default {
@@ -80,7 +93,6 @@ export default {
       props.movie.id
     );
     loadMovie();
-    console.log("movieRecommend", movieRecommend);
 
     const close = () => {
       emit("closeDetail");
@@ -149,7 +161,8 @@ export default {
   font-weight: bolder;
 }
 
-.vote p {
+.vote p,
+.recommend-vote p {
   color: #46d369;
   font-weight: bold;
 }
@@ -157,5 +170,37 @@ export default {
 .movie-about {
   width: 70%;
   margin-right: 20px;
+}
+
+.modal-recommend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding: 10px;
+}
+
+.recommend {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  width: 240px;
+  border-radius: 5px;
+  opacity: 1;
+  background: #2f2f2f;
+  margin: 5px 5px;
+}
+
+.recommend-img {
+  display: flex;
+  height: 45%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  /* border-radius: 8px; */
+}
+
+.modal-detail h2 {
+  margin-left: 20px;
 }
 </style>
