@@ -54,7 +54,17 @@
           </div>
         </div>
       </div>
-      <div class="modal-recommend"></div>
+      <div class="modal-recommend">
+        <div
+          class="recommend"
+          v-for="recommend in movieRecommend"
+          :key="recommend.id"
+        >
+          <div class="recommend-title">
+            {{ recommend.title }}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -66,15 +76,17 @@ import getMovie from "../composables/getMovie";
 export default {
   props: ["movie"],
   setup(props, { emit }) {
-    const { loadMovie, movieInfo, movieCast } = getMovie(props.movie.id);
+    const { loadMovie, movieInfo, movieCast, movieRecommend } = getMovie(
+      props.movie.id
+    );
     loadMovie();
-    console.log("🚀movieInfo", movieCast);
+    console.log("movieRecommend", movieRecommend);
 
     const close = () => {
       emit("closeDetail");
     };
 
-    return { close, movieInfo, movieCast };
+    return { close, movieInfo, movieCast, movieRecommend };
   },
 };
 </script>
@@ -87,6 +99,7 @@ export default {
   background: rgba(0, 0, 0, 0.5);
   width: 100%;
   height: 100%;
+  overflow-y: auto;
 }
 
 .modal-detail {
@@ -94,7 +107,6 @@ export default {
   flex-direction: column;
   top: 120px;
   margin: 100px auto;
-  height: 90%;
   width: 800px;
   border-radius: 8px;
   transform: translateX(-39px) translateY(-50px) scaleX(1) scaleY(1)
@@ -123,7 +135,7 @@ export default {
   display: flex;
   justify-content: center;
   /* align-items: center; */
-  overflow: hidden;
+  /* overflow: hidden; */
   border-radius: 8px;
 }
 
