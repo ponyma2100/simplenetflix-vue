@@ -9,12 +9,11 @@
       </div>
       <div class="modal-info">
         <div class="modal-button">
-          <div class="add">
+          <div class="btn-add">
             <i class="fas fa-plus-circle"></i>
             <i class="far fa-check-circle"></i>
           </div>
-          <div class="like">
-            <i class="far fa-thumbs-up"></i>
+          <div class="btn-like" :class="{ like: isLike }" @click="clickLike">
             <i class="fas fa-thumbs-up"></i>
           </div>
         </div>
@@ -71,7 +70,7 @@
             {{ recommend.title }}
           </div>
           <div class="recommend-vote">
-            <p>{{ recommend.vote_average }} 平均評分</p>
+            <p>{{ recommend.vote_average.toFixed(1) }} 平均評分</p>
           </div>
           <div class="recommend-overview">
             <p>{{ recommend.overview.substring(0, 100) + "..." }}</p>
@@ -83,11 +82,10 @@
 </template>
 
 <script>
-import { computed } from "@vue/reactivity";
 import getMovie from "../composables/getMovie";
 
 export default {
-  props: ["movie"],
+  props: ["movie", "isLike"],
   setup(props, { emit }) {
     const { loadMovie, movieInfo, movieCast, movieRecommend } = getMovie(
       props.movie.id
@@ -98,7 +96,11 @@ export default {
       emit("closeDetail");
     };
 
-    return { close, movieInfo, movieCast, movieRecommend };
+    const clickLike = (e) => {
+      emit("showLike");
+    };
+
+    return { close, movieInfo, movieCast, movieRecommend, clickLike };
   },
 };
 </script>
@@ -167,9 +169,18 @@ export default {
   font-weight: bold;
 }
 
+.like {
+  color: #46d369;
+}
+
 .movie-about {
   width: 70%;
   margin-right: 20px;
+}
+
+.movie-intro p {
+  color: #777;
+  font-weight: bold;
 }
 
 .modal-recommend {
@@ -183,7 +194,7 @@ export default {
   display: flex;
   flex-direction: column;
   height: 300px;
-  width: 240px;
+  width: 245px;
   border-radius: 5px;
   opacity: 1;
   background: #2f2f2f;

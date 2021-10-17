@@ -35,10 +35,10 @@
   margin: 0;
   padding:2px;
   font-family: 'Nunito', sans-serif;
-  color: var(--secondary-light);
 }
 
 body {
+  color: var(--secondary-light);
   background: var(--background-dark-2);
 }
 

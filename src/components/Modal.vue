@@ -8,15 +8,14 @@
     </div>
     <div class="modal-info">
       <div class="modal-button">
-        <div class="add">
+        <div class="btn-add">
           <i class="fas fa-plus-circle"></i>
           <i class="far fa-check-circle"></i>
         </div>
-        <div class="like">
-          <i class="far fa-thumbs-up"></i>
+        <div class="btn-like" :class="{ like: isLike }" @click="clickLike">
           <i class="fas fa-thumbs-up"></i>
         </div>
-        <div class="moreinfo" @click="handleClick">
+        <div class="btn-info" @click="handleClick">
           <i class="fas fa-chevron-circle-down"></i>
         </div>
       </div>
@@ -34,15 +33,21 @@
 </template>
 
 <script>
+import { ref } from "@vue/reactivity";
 export default {
-  props: ["movie"],
+  props: ["movie", "isLike"],
 
   setup(props, { emit }) {
+    const isLike = ref(false);
+
     const handleClick = (e) => {
       emit("showDetail");
     };
 
-    return { handleClick };
+    const clickLike = (e) => {
+      emit("showLike");
+    };
+    return { handleClick, clickLike };
   },
 };
 </script>
@@ -94,5 +99,9 @@ export default {
 .vote p {
   color: #46d369;
   font-weight: bold;
+}
+
+.like {
+  color: #46d369;
 }
 </style>
