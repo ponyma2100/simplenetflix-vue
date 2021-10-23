@@ -11,16 +11,16 @@
       v-show="isHover"
       @mouseleave="isHover = false"
       @showDetail="toggleModalDetail"
-      @showLike="toggleIsLike"
-      :isLike="isLike"
+      @showLike="toggleIsLike(movie.id)"
     />
+    <!-- :isLike="isLike" -->
     <ModalDetal
       v-if="showModal"
       :movie="movie"
       @closeDetail="closeModalDetail"
-      @showLike="toggleIsLike"
-      :isLike="isLike"
+      @showLike="toggleIsLike(movie.id)"
     />
+    <!-- :isLike="isLike" -->
   </div>
 </template>
 
@@ -35,7 +35,6 @@ export default {
   setup(props) {
     const isHover = ref(false);
     const showModal = ref(false);
-    const isLike = ref(false);
 
     const handleHover = (e) => {
       isHover.value = !isHover.value;
@@ -49,12 +48,8 @@ export default {
       showModal.value = !showModal.value;
     };
 
-    const toggleIsLike = () => {
-      isLike.value = !isLike.value;
-      console.log(
-        "🚀 ~ file: SingleMovie.vue ~ line 51 ~ toggleIsLike ~ isLike.value",
-        isLike.value
-      );
+    const toggleIsLike = (id) => {
+      props.movie.isLike = !props.movie.isLike;
     };
 
     return {
@@ -64,7 +59,7 @@ export default {
       showModal,
       closeModalDetail,
       toggleIsLike,
-      isLike,
+      // isLike,
     };
   },
 };

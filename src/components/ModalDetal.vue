@@ -13,7 +13,11 @@
             <i class="fas fa-plus-circle"></i>
             <i class="far fa-check-circle"></i>
           </div>
-          <div class="btn-like" :class="{ like: isLike }" @click="clickLike">
+          <div
+            class="btn-like"
+            @click="clickLike"
+            :class="{ like: movie.isLike }"
+          >
             <i class="fas fa-thumbs-up"></i>
           </div>
         </div>
@@ -85,8 +89,9 @@
 import getMovie from "../composables/getMovie";
 
 export default {
-  props: ["movie", "isLike"],
+  props: ["movie"],
   setup(props, { emit }) {
+    console.log("🚀 ~ file: ModalDetal.vue ~ line 91 ~ setup ~ props", props);
     const { loadMovie, movieInfo, movieCast, movieRecommend } = getMovie(
       props.movie.id
     );
@@ -97,7 +102,7 @@ export default {
     };
 
     const clickLike = (e) => {
-      emit("showLike");
+      emit("showLike", props.movie.id);
     };
 
     return { close, movieInfo, movieCast, movieRecommend, clickLike };

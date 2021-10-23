@@ -12,7 +12,11 @@
           <i class="fas fa-plus-circle"></i>
           <i class="far fa-check-circle"></i>
         </div>
-        <div class="btn-like" :class="{ like: isLike }" @click="clickLike">
+        <div
+          class="btn-like"
+          :class="{ like: movie.isLike }"
+          @click="clickLike"
+        >
           <i class="fas fa-thumbs-up"></i>
         </div>
         <div class="btn-info" @click="handleClick">
@@ -34,7 +38,7 @@
 
 <script>
 export default {
-  props: ["movie", "isLike"],
+  props: ["movie"],
 
   setup(props, { emit }) {
     const handleClick = (e) => {
@@ -42,7 +46,7 @@ export default {
     };
 
     const clickLike = (e) => {
-      emit("showLike");
+      emit("showLike", props.movie.id);
     };
     return { handleClick, clickLike };
   },
