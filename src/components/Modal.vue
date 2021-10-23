@@ -8,9 +8,13 @@
     </div>
     <div class="modal-info">
       <div class="modal-button">
-        <div class="btn-add">
-          <i class="fas fa-plus-circle"></i>
-          <i class="far fa-check-circle"></i>
+        <div class="btn-add" @click="clickFav">
+          <div v-show="!movie.isFav">
+            <i class="fas fa-plus-circle"></i>
+          </div>
+          <div v-show="movie.isFav" :class="{ fav: movie.isFav }">
+            <i class="far fa-check-circle"></i>
+          </div>
         </div>
         <div
           class="btn-like"
@@ -46,9 +50,14 @@ export default {
     };
 
     const clickLike = (e) => {
-      emit("showLike", props.movie.id);
+      emit("addLike", props.movie.id);
     };
-    return { handleClick, clickLike };
+
+    const clickFav = (e) => {
+      emit("addFav", props.movie.id);
+    };
+
+    return { handleClick, clickLike, clickFav };
   },
 };
 </script>
@@ -102,7 +111,8 @@ export default {
   font-weight: bold;
 }
 
-.like {
+.like,
+.fav {
   color: #46d369;
 }
 </style>

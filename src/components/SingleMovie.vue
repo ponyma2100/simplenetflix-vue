@@ -11,16 +11,17 @@
       v-show="isHover"
       @mouseleave="isHover = false"
       @showDetail="toggleModalDetail"
-      @showLike="toggleIsLike(movie.id)"
+      @addLike="toggleIsLike(movie.id)"
+      @addFav="toggleAddFav(movie.id)"
     />
     <!-- :isLike="isLike" -->
     <ModalDetal
       v-if="showModal"
       :movie="movie"
       @closeDetail="closeModalDetail"
-      @showLike="toggleIsLike(movie.id)"
+      @addLike="toggleIsLike(movie.id)"
+      @addFav="toggleAddFav(movie.id)"
     />
-    <!-- :isLike="isLike" -->
   </div>
 </template>
 
@@ -52,6 +53,9 @@ export default {
       props.movie.isLike = !props.movie.isLike;
     };
 
+    const toggleAddFav = (id) => {
+      props.movie.isFav = !props.movie.isFav;
+    };
     return {
       handleHover,
       isHover,
@@ -59,7 +63,7 @@ export default {
       showModal,
       closeModalDetail,
       toggleIsLike,
-      // isLike,
+      toggleAddFav,
     };
   },
 };
