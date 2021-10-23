@@ -33,13 +33,10 @@
 </template>
 
 <script>
-import { ref } from "@vue/reactivity";
 export default {
   props: ["movie", "isLike"],
 
   setup(props, { emit }) {
-    const isLike = ref(false);
-
     const handleClick = (e) => {
       emit("showDetail");
     };
