@@ -14,7 +14,6 @@
       @addLike="toggleIsLike(movie.id)"
       @addFav="toggleAddFav(movie.id)"
     />
-    <!-- :isLike="isLike" -->
     <ModalDetal
       v-if="showModal"
       :movie="movie"

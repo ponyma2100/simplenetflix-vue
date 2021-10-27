@@ -95,7 +95,6 @@ import getMovie from "../composables/getMovie";
 export default {
   props: ["movie"],
   setup(props, { emit }) {
-    console.log("🚀 ~ file: ModalDetal.vue ~ line 91 ~ setup ~ props", props);
     const { loadMovie, movieInfo, movieCast, movieRecommend } = getMovie(
       props.movie.id
     );
