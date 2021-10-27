@@ -15,4 +15,7 @@ export default {
 </script>
 
 <style >
+.home {
+  margin-top: 50px;
+}
 </style>
