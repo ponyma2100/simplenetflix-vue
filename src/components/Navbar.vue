@@ -1,14 +1,23 @@
 <template>
   <div class="navbar">
     <nav>
-      <h1>SimpleNetflix</h1>
+      <router-link :to="{ name: 'Home' }">
+        <h1>SimpleNetflix</h1>
+      </router-link>
       <div class="links">
-        <div v-if="user">
-          <button @click="handleClick">Logout</button>
+        <div class="left-links">
+          <router-link :to="{ name: 'MyList' }">My List</router-link>
         </div>
-        <div v-else>
-          <router-link class="btn" :to="{ name: 'Signup' }">Signup</router-link>
-          <router-link class="btn" :to="{ name: 'Login' }">Login</router-link>
+        <div class="right-links">
+          <div v-if="user">
+            <button @click="handleClick">Logout</button>
+          </div>
+          <div v-else>
+            <router-link class="btn" :to="{ name: 'Signup' }"
+              >Signup</router-link
+            >
+            <router-link class="btn" :to="{ name: 'Login' }">Login</router-link>
+          </div>
         </div>
       </div>
     </nav>
@@ -41,6 +50,15 @@ nav {
   display: flex;
   align-items: center;
   padding: 0.9rem;
+  width: 100%;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  background: #181818;
+  width: 100%;
+  z-index: 888;
 }
 
 nav h1 {
@@ -48,10 +66,18 @@ nav h1 {
 }
 
 nav .links {
-  margin-left: auto;
+  width: 88%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-nav .links a,
+nav .links a {
+  text-decoration: none;
+  color: white;
+}
+
+nav .right-links a,
 button {
   margin-left: 1rem;
   font-size: 14px;

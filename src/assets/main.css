@@ -91,4 +91,9 @@ input, textarea {
   box-sizing: border-box;
   margin: 20px auto;
   background: var(--background-dark-2);
+  color: var(--secondary-light);
+}
+
+a {
+  color: var(--secondary-light);
 }

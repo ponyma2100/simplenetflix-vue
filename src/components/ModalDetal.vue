@@ -126,6 +126,7 @@ export default {
   width: 100%;
   height: 100%;
   overflow-y: auto;
+  z-index: 999;
 }
 
 .modal-detail {

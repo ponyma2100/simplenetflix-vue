@@ -66,6 +66,7 @@ form {
 }
 
 .container {
+  margin-top: 40px;
   height: 93vh;
   background-image: url("../../src/assets/loginbg.jpg");
   background-size: cover;
