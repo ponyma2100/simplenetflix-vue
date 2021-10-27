@@ -4,11 +4,24 @@ import Login from '../views/Login.vue'
 import Signup from '../views/Signup.vue'
 import MyList from '../views/MyList.vue'
 
+import { projectAuth } from '../firebase/config'
+
+const requireAuth = (to, from, next) => {
+  let user = projectAuth.currentUser
+  if (!user) {
+    router.push({ name: 'Login' })
+  } else {
+    next()
+  }
+}
+
+
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    beforeEnter: requireAuth
   },
   {
     path: '/login',
@@ -23,7 +36,8 @@ const routes = [
   {
     path: '/mylist',
     name: 'MyList',
-    component: MyList
+    component: MyList,
+    beforeEnter: requireAuth
   },
 ]
 
