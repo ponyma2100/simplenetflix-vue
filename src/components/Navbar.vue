@@ -5,7 +5,7 @@
         <h1>SimpleNetflix</h1>
       </router-link>
       <div class="links">
-        <div class="left-links">
+        <div class="left-links" v-show="user">
           <router-link :to="{ name: 'MyList' }">My List</router-link>
         </div>
         <div class="right-links">
@@ -54,10 +54,12 @@ nav {
 }
 
 .navbar {
+  display: flex;
   position: fixed;
   top: 0;
   background: #181818;
   width: 100%;
+  height: 60px;
   z-index: 888;
 }
 
@@ -75,6 +77,10 @@ nav .links {
 nav .links a {
   text-decoration: none;
   color: white;
+}
+
+nav .right-links {
+  margin-left: auto;
 }
 
 nav .right-links a,

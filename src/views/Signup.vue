@@ -30,19 +30,21 @@
 <script>
 import { ref } from "@vue/reactivity";
 import useSignup from "../composables/useSignup";
+import { useRouter } from "vue-router";
 
 export default {
   setup() {
     const { error, signup, isPending } = useSignup();
+    const router = useRouter();
     const email = ref("");
     const password = ref("");
     const displayname = ref("");
 
     const handleSubmit = async () => {
       const res = await signup(email.value, password.value, displayname.value);
-      console.log("🚀 ~ file: Signup.vue ~ line 35 ~ handleSubmit ~ res", res);
       if (!error.value) {
-        console.log("user signed up");
+        router.push({ name: "Home" });
+        // console.log("user signed up");
       }
     };
 
