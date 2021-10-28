@@ -91,10 +91,12 @@
 
 <script>
 import getMovie from "../composables/getMovie";
+import useCollection from "@/composables/useCollection";
 
 export default {
   props: ["movie"],
   setup(props, { emit }) {
+    const { error, addDoc } = useCollection("movielists");
     const { loadMovie, movieInfo, movieCast, movieRecommend } = getMovie(
       props.movie.id
     );
@@ -108,8 +110,28 @@ export default {
       emit("addLike", props.movie.id);
     };
 
-    const clickFav = (e) => {
+    const clickFav = async (e) => {
       emit("addFav", props.movie.id);
+
+      const movie = {
+        title: movieInfo.value.title
+          ? movieInfo.value.title
+          : movieInfo.value.name,
+        name: movieInfo.value.name
+          ? movieInfo.value.name
+          : movieInfo.value.title,
+        vote: movieInfo.value.vote_average,
+        releaseDate: movieInfo.value.release_date,
+        cast: movieCast.value,
+        genres: movieInfo.value.genres,
+        movieRecommend: movieRecommend.value,
+      };
+
+      const res = await addDoc(movie);
+
+      if (!error.value) {
+        console.log("Movielist added");
+      }
     };
 
     return { close, movieInfo, movieCast, movieRecommend, clickLike, clickFav };
