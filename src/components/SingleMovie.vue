@@ -13,6 +13,7 @@
       @showDetail="toggleModalDetail"
       @addLike="toggleIsLike(movie.id)"
       @addFav="toggleAddFav(movie.id)"
+      @removeFav="toggleRemoveFav(movie.id)"
     />
     <ModalDetal
       v-if="showModal"
@@ -20,6 +21,7 @@
       @closeDetail="closeModalDetail"
       @addLike="toggleIsLike(movie.id)"
       @addFav="toggleAddFav(movie.id)"
+      @removeFav="toggleRemoveFav(movie.id)"
     />
   </div>
 </template>
@@ -55,6 +57,11 @@ export default {
     const toggleAddFav = (id) => {
       props.movie.isFav = !props.movie.isFav;
     };
+
+    const toggleRemoveFav = (id) => {
+      props.movie.isFav = !props.movie.isFav;
+    };
+
     return {
       handleHover,
       isHover,
@@ -63,6 +70,7 @@ export default {
       closeModalDetail,
       toggleIsLike,
       toggleAddFav,
+      toggleRemoveFav,
     };
   },
 };

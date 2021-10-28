@@ -18,6 +18,7 @@
     @closeDetail="closeModalDetail"
     @addLike="toggleIsLike"
     @addFav="toggleAddFav"
+    @removeFav="toggleRemoveFav"
   />
 </template>
 
@@ -72,6 +73,10 @@ export default {
       movie.value.isFav = !movie.value.isFav;
     };
 
+    const toggleRemoveFav = (id) => {
+      movie.value.isFav = !movie.value.isFav;
+    };
+
     return {
       randomNum,
       trend,
@@ -81,6 +86,7 @@ export default {
       handleClick,
       toggleIsLike,
       toggleAddFav,
+      toggleRemoveFav,
       showModal,
       closeModalDetail,
       toggleModalDetail,

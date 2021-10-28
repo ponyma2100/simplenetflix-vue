@@ -9,11 +9,15 @@
       </div>
       <div class="modal-info">
         <div class="modal-button">
-          <div class="btn-add" @click="clickFav">
-            <div v-show="!movie.isFav">
+          <div class="btn-add">
+            <div v-show="!movie.isFav" @click="addFav">
               <i class="fas fa-plus-circle"></i>
             </div>
-            <div v-show="movie.isFav" :class="{ fav: movie.isFav }">
+            <div
+              v-show="movie.isFav"
+              @click="removeFav"
+              :class="{ fav: movie.isFav }"
+            >
               <i class="far fa-check-circle"></i>
             </div>
           </div>
@@ -92,11 +96,13 @@
 <script>
 import getMovie from "../composables/getMovie";
 import useCollection from "@/composables/useCollection";
+import getUser from "../composables/getUser";
 
 export default {
   props: ["movie"],
   setup(props, { emit }) {
     const { error, addDoc } = useCollection("movielists");
+    const { user } = getUser();
     const { loadMovie, movieInfo, movieCast, movieRecommend } = getMovie(
       props.movie.id
     );
@@ -110,7 +116,7 @@ export default {
       emit("addLike", props.movie.id);
     };
 
-    const clickFav = async (e) => {
+    const addFav = async (e) => {
       emit("addFav", props.movie.id);
 
       const movie = {
@@ -125,8 +131,8 @@ export default {
         cast: movieCast.value,
         genres: movieInfo.value.genres,
         movieRecommend: movieRecommend.value,
+        userId: user.value.uid,
       };
-
       const res = await addDoc(movie);
 
       if (!error.value) {
@@ -134,7 +140,19 @@ export default {
       }
     };
 
-    return { close, movieInfo, movieCast, movieRecommend, clickLike, clickFav };
+    const removeFav = async (e) => {
+      emit("removeFav", props.movie.id);
+    };
+
+    return {
+      close,
+      movieInfo,
+      movieCast,
+      movieRecommend,
+      clickLike,
+      addFav,
+      removeFav,
+    };
   },
 };
 </script>
