@@ -119,7 +119,8 @@ export default {
     const addFav = async (e) => {
       emit("addFav", props.movie.id);
 
-      const movie = {
+      const movies = {
+        poster_path: movieInfo.value.poster_path,
         title: movieInfo.value.title
           ? movieInfo.value.title
           : movieInfo.value.name,
@@ -127,16 +128,18 @@ export default {
           ? movieInfo.value.name
           : movieInfo.value.title,
         vote: movieInfo.value.vote_average,
-        releaseDate: movieInfo.value.release_date,
+        release_date: movieInfo.value.release_date,
         cast: movieCast.value,
         genres: movieInfo.value.genres,
         movieRecommend: movieRecommend.value,
         userId: user.value.uid,
+        id: movieInfo.value.id,
       };
-      const res = await addDoc(movie);
+      const res = await addDoc(movies);
 
       if (!error.value) {
         console.log("Movielist added");
+        console.log(movies);
       }
     };
 

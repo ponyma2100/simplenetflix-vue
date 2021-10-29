@@ -1,5 +1,5 @@
 <template>
-  <div class="movie" @mouseenter="handleHover">
+  <div class="movie" @mouseenter="handleHover" v-if="movie">
     <div class="img" v-show="!isHover">
       <img
         :src="`https://image.tmdb.org/t/p/w300${movie.poster_path}`"
