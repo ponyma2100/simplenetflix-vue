@@ -7,7 +7,7 @@ const getCollection = (collection, query) => {
 
   let collectionRef = projectFirestore.collection(collection)
   if (query) {
-    console.log("🚀 ~ file: getCollection.js ~ line 11 ~ getCollection ~ query", ...query)
+
     collectionRef = collectionRef.where(...query)
   }
 

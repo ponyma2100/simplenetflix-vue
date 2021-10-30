@@ -104,8 +104,9 @@ export default {
     const { error, addDoc } = useCollection("movielists");
     const { user } = getUser();
     const { loadMovie, movieInfo, movieCast, movieRecommend } = getMovie(
-      props.movie.id
+      props.movie.uid ? props.movie.uid : props.movie.id
     );
+
     loadMovie();
 
     const close = () => {
@@ -133,7 +134,7 @@ export default {
         genres: movieInfo.value.genres,
         movieRecommend: movieRecommend.value,
         userId: user.value.uid,
-        id: movieInfo.value.id,
+        uid: movieInfo.value.id,
       };
       const res = await addDoc(movies);
 

@@ -18,7 +18,7 @@ export default {
       user.value.uid,
     ]);
 
-    console.log("🚀 ~ file: MyList.vue ~ line 16 ~ setup ~ movie", movies);
+    // userRef = db.collection("Users").document(firebaseAuth.getCurrentUser().getUid());
     return { movies };
   },
 };

@@ -11,10 +11,9 @@
 
 <script>
 import SingleMovie from "../components/SingleMovie.vue";
-import Modal from "../components/Modal.vue";
 
 export default {
-  components: { SingleMovie, Modal },
+  components: { SingleMovie },
   props: ["movies"],
 };
 </script>
