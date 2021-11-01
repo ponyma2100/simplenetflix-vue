@@ -22,7 +22,10 @@ export default {
     return { movies };
   },
 };
-</script>
+</script >
 
-<style>
+<style scoped>
+MyMovieList {
+  flex-wrap: wrap;
+}
 </style>

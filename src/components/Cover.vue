@@ -12,7 +12,7 @@
     </div>
     <button class="cover-info" @click.prevent="handleClick">More info</button>
   </div>
-  <ModalDetal
+  <ModalDetail
     v-if="showModal"
     :movie="movie"
     @closeDetail="closeModalDetail"
@@ -25,11 +25,11 @@
 <script>
 import { ref } from "@vue/reactivity";
 import getMovies from "../composables/getMovies";
-import ModalDetal from "./ModalDetal.vue";
+import ModalDetail from "./ModalDetail.vue";
 import { onMounted } from "@vue/runtime-core";
 
 export default {
-  components: { ModalDetal },
+  components: { ModalDetail },
   setup() {
     const { getTrend, trend } = getMovies();
     const showModal = ref(false);

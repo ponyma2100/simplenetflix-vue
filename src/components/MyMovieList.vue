@@ -19,13 +19,18 @@ export default {
 </script>
 
 <style scoped>
+.row {
+  padding-left: 15px;
+}
 .slide {
   width: 98vw;
   /* height: 350px; */
   /* max-height: 250px; */
   display: flex;
+  flex-wrap: wrap;
   padding: 0.5rem 0.5rem;
-  overflow: scroll hidden;
-  overflow-x: hidden;
+}
+.movie-list {
+  padding: 10px 20px;
 }
 </style>

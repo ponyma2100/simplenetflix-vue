@@ -92,13 +92,16 @@ export default {
 </script>
 
 <style scoped>
+.row {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  height: 310px;
+}
+
 .slide {
   width: 98vw;
-  /* height: 350px; */
   /* max-height: 250px; */
   display: flex;
   padding: 0.5rem 0.5rem;
-  overflow: scroll hidden;
-  overflow-x: hidden;
 }
 </style>

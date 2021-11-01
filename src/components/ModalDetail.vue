@@ -122,6 +122,7 @@ export default {
 
       const movies = {
         poster_path: movieInfo.value.poster_path,
+        backdrop_path: movieInfo.value.backdrop_path,
         title: movieInfo.value.title
           ? movieInfo.value.title
           : movieInfo.value.name,
@@ -135,6 +136,8 @@ export default {
         movieRecommend: movieRecommend.value,
         userId: user.value.uid,
         uid: movieInfo.value.id,
+        isFav: props.movie.isFav,
+        isLike: props.movie.isLike,
       };
       const res = await addDoc(movies);
 

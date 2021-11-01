@@ -60,7 +60,7 @@ nav {
   background: #181818;
   width: 100%;
   height: 60px;
-  z-index: 888;
+  z-index: 2;
 }
 
 nav h1 {

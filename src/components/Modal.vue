@@ -71,6 +71,8 @@ export default {
       await loadMovie();
       emit("addFav", props.movie.id);
       const movie = {
+        poster_path: movieInfo.value.poster_path,
+        backdrop_path: movieInfo.value.backdrop_path,
         title: movieInfo.value.title
           ? movieInfo.value.title
           : movieInfo.value.name,
@@ -78,11 +80,14 @@ export default {
           ? movieInfo.value.name
           : movieInfo.value.title,
         vote: movieInfo.value.vote_average,
-        releaseDate: movieInfo.value.release_date,
+        release_date: movieInfo.value.release_date,
         cast: movieCast.value,
         genres: movieInfo.value.genres,
         movieRecommend: movieRecommend.value,
         userId: user.value.uid,
+        uid: movieInfo.value.id,
+        isFav: props.movie.isFav,
+        isLike: props.movie.isLike,
       };
       const res = await addDoc(movie);
 
@@ -104,17 +109,18 @@ export default {
 .modal {
   display: flex;
   flex-direction: column;
-  position: absolute;
+  /* position: absolute; */
   height: 300px;
   width: 300px;
   border-radius: 8px;
-  transform: translateX(-39px) translateY(-50px) scaleX(1) scaleY(1)
-    translateZ(0px);
+  transform: translateX(-39px) translateY(-50px);
   z-index: 999;
   opacity: 1;
   background: #222222;
   box-shadow: rgb(0 0 0 / 75%) 0px 3px 10px;
   cursor: pointer;
+  top: 0;
+  left: -200px;
 }
 
 .modal-button {

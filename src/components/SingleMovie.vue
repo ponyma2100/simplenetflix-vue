@@ -6,6 +6,7 @@
         alt=""
       />
     </div>
+
     <Modal
       :movie="movie"
       v-show="isHover"
@@ -15,7 +16,7 @@
       @addFav="toggleAddFav(movie.id)"
       @removeFav="toggleRemoveFav(movie.id)"
     />
-    <ModalDetal
+    <ModalDetail
       v-if="showModal"
       :movie="movie"
       @closeDetail="closeModalDetail"
@@ -29,11 +30,11 @@
 <script>
 import { ref } from "@vue/reactivity";
 import Modal from "../components/Modal.vue";
-import ModalDetal from "./ModalDetal.vue";
+import ModalDetail from "./ModalDetail.vue";
 
 export default {
   props: ["movie"],
-  components: { Modal, ModalDetal },
+  components: { Modal, ModalDetail },
   setup(props) {
     const isHover = ref(false);
     const showModal = ref(false);
