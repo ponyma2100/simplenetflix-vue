@@ -55,7 +55,6 @@ export default {
 
   setup(props, { emit }) {
     const { error, addDoc } = useCollection("movielists");
-
     const { user } = getUser();
     const { loadMovie, movieInfo, movieCast, movieRecommend } = getMovie(
       props.movie.id

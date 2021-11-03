@@ -15,7 +15,7 @@
             </div>
             <div
               v-show="movie.isFav"
-              @click="removeFav"
+              @click="removeFav(movie.uid ? movie.uid : movie.id)"
               :class="{ fav: movie.isFav }"
             >
               <i class="far fa-check-circle"></i>
@@ -96,6 +96,7 @@
 <script>
 import getMovie from "../composables/getMovie";
 import useCollection from "@/composables/useCollection";
+import useDocument from "../composables/useDocument";
 import getUser from "../composables/getUser";
 
 export default {
@@ -142,13 +143,19 @@ export default {
       const res = await addDoc(movies);
 
       if (!error.value) {
-        console.log("Movielist added");
-        console.log(movies);
+        console.log("Movie added");
       }
     };
 
-    const removeFav = async (e) => {
+    const removeFav = async (id) => {
+      const { deleteDoc, getMovieId, movieId } = useDocument("movielists");
+
       emit("removeFav", props.movie.id);
+      await getMovieId(["uid", "==", id]);
+      await deleteDoc(movieId.value);
+      if (!error.value) {
+        console.log("Movie removed");
+      }
     };
 
     return {
