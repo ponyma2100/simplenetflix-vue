@@ -79,8 +79,8 @@ export default {
 
 <style scoped>
 .movie {
-  height: 170px;
-  width: 250px;
+  height: 200px;
+  width: 280px;
   margin: 5px;
 }
 .img {

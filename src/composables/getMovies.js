@@ -36,6 +36,7 @@ const getMovies = () => {
       origin.value.map(movie => {
         movie.isLike = false
         movie.isFav = false
+        movie.isTv = true
       })
     }
     catch (err) {

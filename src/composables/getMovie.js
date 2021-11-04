@@ -24,7 +24,23 @@ const getMovie = (id) => {
       console.log(err)
     }
   }
-  return { loadMovie, movieInfo, movieCast, movieRecommend }
+
+  const loadTv = async () => {
+
+    try {
+      const res = await fetch(`${apiUrl}/tv/${id}?api_key=${apiKey}&append_to_response=recommendations,aggregate_credits`)
+      const data = await res.json()
+      movieInfo.value = data
+      movieCast.value = data.aggregate_credits.cast.splice(0, 3)
+      movieRecommend.value = data.recommendations.results.splice(0, 9)
+
+      return movieInfo, movieCast, movieRecommend
+
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  return { loadMovie, loadTv, movieInfo, movieCast, movieRecommend }
 }
 
 export default getMovie

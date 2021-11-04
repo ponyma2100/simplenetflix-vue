@@ -39,7 +39,11 @@
               <p>{{ movie.vote_average }} 平均評分</p>
             </div>
             <div class="releasedate">
-              {{ movieInfo.release_date }}
+              {{
+                movieInfo.release_date
+                  ? movieInfo.release_date
+                  : movieInfo.first_air_date
+              }}
             </div>
             <div class="overview">
               {{ movie.overview }}
@@ -104,11 +108,14 @@ export default {
   setup(props, { emit }) {
     const { error, addDoc } = useCollection("movielists");
     const { user } = getUser();
-    const { loadMovie, movieInfo, movieCast, movieRecommend } = getMovie(
-      props.movie.uid ? props.movie.uid : props.movie.id
-    );
+    const { loadMovie, loadTv, movieInfo, movieCast, movieRecommend } =
+      getMovie(props.movie.uid ? props.movie.uid : props.movie.id);
 
-    loadMovie();
+    if (props.movie.isTv) {
+      loadTv();
+    } else {
+      loadMovie();
+    }
 
     const close = () => {
       emit("closeDetail");
@@ -131,7 +138,9 @@ export default {
           ? movieInfo.value.name
           : movieInfo.value.title,
         vote: movieInfo.value.vote_average,
-        release_date: movieInfo.value.release_date,
+        release_date: movieInfo.value.release_date
+          ? movieInfo.value.release_date
+          : movieInfo.value.first_air_date,
         cast: movieCast.value,
         genres: movieInfo.value.genres,
         movieRecommend: movieRecommend.value,
