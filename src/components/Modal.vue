@@ -33,8 +33,7 @@
       </div>
       <div class="modal-description">
         <div class="title">
-          <p>{{ movie.title }}</p>
-          <p>{{ movie.name }}</p>
+          <p>{{ movie.title ? movie.title : movie.name }}</p>
         </div>
         <div class="vote">
           <p>{{ movie.vote_average }} 平均評分</p>

@@ -18,7 +18,6 @@ export default {
       user.value.uid,
     ]);
 
-    // userRef = db.collection("Users").document(firebaseAuth.getCurrentUser().getUid());
     return { movies };
   },
 };
