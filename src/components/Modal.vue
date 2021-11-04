@@ -121,7 +121,7 @@ export default {
   height: 300px;
   width: 300px;
   border-radius: 8px;
-  transform: translateX(-39px) translateY(-50px);
+  transform: translateX(-10px) translateY(-50px);
   z-index: 999;
   opacity: 1;
   background: #222222;

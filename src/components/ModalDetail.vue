@@ -83,7 +83,7 @@
             />
           </div>
           <div class="recommend-title">
-            {{ recommend.title }}
+            {{ recommend.title ? recommend.title : recommend.name }}
           </div>
           <div class="recommend-vote">
             <p>{{ recommend.vote_average.toFixed(1) }} 平均評分</p>
