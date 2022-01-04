@@ -147,6 +147,7 @@ export default {
         uid: movieInfo.value.id,
         isFav: props.movie.isFav,
         isLike: props.movie.isLike,
+        isTv: props.movie.isTv,
       };
       const res = await addDoc(movies);
 

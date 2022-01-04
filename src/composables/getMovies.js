@@ -21,6 +21,7 @@ const getMovies = () => {
       trend.value.map(movie => {
         movie.isLike = false
         movie.isFav = false
+        movie.isTv = false
       })
     }
     catch (err) {
@@ -52,6 +53,7 @@ const getMovies = () => {
       top.value.map(movie => {
         movie.isLike = false
         movie.isFav = false
+        movie.isTv = false
       })
     }
     catch (err) {
@@ -67,6 +69,7 @@ const getMovies = () => {
       action.value.map(movie => {
         movie.isLike = false
         movie.isFav = false
+        movie.isTv = false
       })
 
     }
@@ -82,6 +85,7 @@ const getMovies = () => {
       comedy.value.map(movie => {
         movie.isLike = false
         movie.isFav = false
+        movie.isTv = false
       })
     }
     catch (err) {
@@ -97,6 +101,7 @@ const getMovies = () => {
       romance.value.map(movie => {
         movie.isLike = false
         movie.isFav = false
+        movie.isTv = false
       })
     }
     catch (err) {
