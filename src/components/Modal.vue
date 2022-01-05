@@ -148,7 +148,6 @@ export default {
     };
 
     const addLike = async (id) => {
-      console.log("🚀 ~ file: Modal.vue ~ line 151 ~ addLike ~ id", id);
       const { updateDoc, getMovieId, movieId } = useDocument("movielists");
       if (props.movie.isTv) {
         await loadTv();
