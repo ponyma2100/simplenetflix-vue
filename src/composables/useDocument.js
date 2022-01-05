@@ -35,10 +35,20 @@ const useDocument = (collection) => {
     }
   }
 
+  const updateDoc = async (id, updates) => {
+    let docRef = collectionRef.doc(id)
+    error.value = null
 
+    try {
+      const res = await docRef.update(updates)
+      return res
+    } catch (err) {
+      console.log(err.message)
+      error.value = 'could not update the document'
+    }
+  }
 
-
-  return { getMovieId, deleteDoc, movieId }
+  return { getMovieId, deleteDoc, updateDoc, movieId }
 }
 
 

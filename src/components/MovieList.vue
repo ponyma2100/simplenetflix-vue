@@ -50,7 +50,6 @@
 </template>
 
 <script>
-import useCollection from "@/composables/useCollection";
 import getMovies from "../composables/getMovies";
 import SingleMovie from "../components/SingleMovie.vue";
 import Modal from "../components/Modal.vue";
@@ -75,19 +74,13 @@ export default {
     } = getMovies();
 
     onMounted(async () => {
+      await getTrend();
       await getTop();
       await getNetflixOrigin();
       await getAction();
       await getComedy();
       await getRomance();
     });
-
-    const addTrend = async () => {
-      const { error, addDoc } = useCollection("trend");
-      getTrend();
-      await addDoc(trend.value);
-    };
-    addTrend();
 
     return {
       trend,

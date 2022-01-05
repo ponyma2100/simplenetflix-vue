@@ -10,7 +10,7 @@
       <div class="modal-info">
         <div class="modal-button">
           <div class="btn-add">
-            <div v-show="!movie.isFav" @click="addFav">
+            <div v-show="!movie.isFav" @click="addFav(movie.id)">
               <i class="fas fa-plus-circle"></i>
             </div>
             <div
@@ -23,10 +23,21 @@
           </div>
           <div
             class="btn-like"
-            @click="clickLike"
+            v-show="!movie.isLike"
+            @click="addLike(movie.uid ? movie.uid : movie.id)"
+          >
+            <!-- :class="{ like: movie.isLike }" -->
+            <i class="fas fa-thumbs-up"></i>
+          </div>
+          <div
+            v-show="movie.isLike"
+            @click="removeLike(movie.uid ? movie.uid : movie.id)"
             :class="{ like: movie.isLike }"
           >
             <i class="fas fa-thumbs-up"></i>
+          </div>
+          <div class="btn-info" @click="handleClick">
+            <i class="fas fa-chevron-circle-down"></i>
           </div>
         </div>
         <div class="modal-description">
@@ -106,6 +117,8 @@ export default {
   props: ["movie"],
   setup(props, { emit }) {
     const { error, addDoc } = useCollection("movielists");
+    const { deleteDoc, updateDoc, getMovieId, movieId } =
+      useDocument("movielists");
     const { user } = getUser();
     const { loadMovie, loadTv, movieInfo, movieCast, movieRecommend } =
       getMovie(props.movie.uid ? props.movie.uid : props.movie.id);
@@ -120,14 +133,17 @@ export default {
       emit("closeDetail");
     };
 
-    const clickLike = (e) => {
-      emit("addLike", props.movie.id);
-    };
+    const addFav = async (id) => {
+      if (props.movie.isTv) {
+        await loadTv();
+      } else {
+        await loadMovie();
+      }
+      props.movie.isFav = !props.movie.isFav;
 
-    const addFav = async (e) => {
-      emit("addFav", props.movie.id);
+      let favMovies = JSON.parse(localStorage.getItem("favMovieList")) || [];
 
-      const movies = {
+      const movie = {
         poster_path: movieInfo.value.poster_path,
         backdrop_path: movieInfo.value.backdrop_path,
         title: movieInfo.value.title
@@ -149,7 +165,11 @@ export default {
         isLike: props.movie.isLike,
         isTv: props.movie.isTv,
       };
-      const res = await addDoc(movies);
+
+      favMovies.push(movie);
+      localStorage.setItem("favMovieList", JSON.stringify(favMovies));
+
+      const res = await addDoc(movie);
 
       if (!error.value) {
         console.log("Movie added");
@@ -157,13 +177,97 @@ export default {
     };
 
     const removeFav = async (id) => {
+      props.movie.isFav = !props.movie.isFav;
+
       const { deleteDoc, getMovieId, movieId } = useDocument("movielists");
 
-      emit("removeFav", props.movie.id);
+      let favMovies = JSON.parse(localStorage.getItem("favMovieList"));
+
+      const removeIndex = favMovies.findIndex((movie) => movie.uid === id);
+
+      if (removeIndex === -1) return;
+      favMovies.splice(removeIndex, 1);
+
+      localStorage.removeItem("favMovieList");
+      localStorage.setItem("favMovieList", JSON.stringify(favMovies));
+
       await getMovieId(["uid", "==", id]);
       await deleteDoc(movieId.value);
       if (!error.value) {
         console.log("Movie removed");
+      }
+    };
+
+    const addLike = async (id) => {
+      const { updateDoc, getMovieId, movieId } = useDocument("movielists");
+      if (props.movie.isTv) {
+        await loadTv();
+      } else {
+        await loadMovie();
+      }
+      props.movie.isLike = !props.movie.isLike;
+
+      let likeMovies = JSON.parse(localStorage.getItem("likeMovieList")) || [];
+
+      const movie = {
+        poster_path: movieInfo.value.poster_path,
+        backdrop_path: movieInfo.value.backdrop_path,
+        title: movieInfo.value.title
+          ? movieInfo.value.title
+          : movieInfo.value.name,
+        name: movieInfo.value.name
+          ? movieInfo.value.name
+          : movieInfo.value.title,
+        vote: movieInfo.value.vote_average,
+        release_date: movieInfo.value.release_date
+          ? movieInfo.value.release_date
+          : movieInfo.value.first_air_date,
+        cast: movieCast.value,
+        genres: movieInfo.value.genres,
+        movieRecommend: movieRecommend.value,
+        userId: user.value.uid,
+        uid: movieInfo.value.id,
+        isFav: props.movie.isFav,
+        isLike: props.movie.isLike,
+        isTv: props.movie.isTv,
+      };
+
+      likeMovies.push(movie);
+      localStorage.setItem("likeMovieList", JSON.stringify(likeMovies));
+
+      if (props.movie.isFav) {
+        await getMovieId(["uid", "==", id]);
+        await updateDoc(movieId.value, movie);
+      }
+      if (!error.value) {
+        console.log("Movie liked");
+      }
+      // emit("addLike", props.movie.id);
+    };
+
+    const removeLike = async (id) => {
+      props.movie.isLike = !props.movie.isLike;
+      let likeMovies = JSON.parse(localStorage.getItem("likeMovieList"));
+
+      const removeIndex = likeMovies.findIndex((movie) => movie.uid === id);
+
+      if (removeIndex === -1) return;
+      likeMovies.splice(removeIndex, 1);
+
+      localStorage.removeItem("likeMovieList");
+      localStorage.setItem("likeMovieList", JSON.stringify(likeMovies));
+
+      const movie = {
+        isLike: props.movie.isLike,
+      };
+
+      if (props.movie.isFav) {
+        await getMovieId(["uid", "==", id]);
+        await updateDoc(movieId.value, movie);
+      }
+
+      if (!error.value) {
+        console.log("Movie unliked");
       }
     };
 
@@ -172,7 +276,8 @@ export default {
       movieInfo,
       movieCast,
       movieRecommend,
-      clickLike,
+      addLike,
+      removeLike,
       addFav,
       removeFav,
     };
