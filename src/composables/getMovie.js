@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 
 const apiUrl = 'https://api.themoviedb.org/3'
-const apiKey = '304a9149a9088e1bb526b00111bc00a0'
+const apiKey = process.env.VUE_APP_APIKEY;
 // https://api.themoviedb.org/3/movie/157336?api_key={api_key}
 
 const getMovie = (id) => {

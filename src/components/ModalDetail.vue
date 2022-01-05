@@ -36,9 +36,6 @@
           >
             <i class="fas fa-thumbs-up"></i>
           </div>
-          <div class="btn-info" @click="handleClick">
-            <i class="fas fa-chevron-circle-down"></i>
-          </div>
         </div>
         <div class="modal-description">
           <div class="movie-about">
