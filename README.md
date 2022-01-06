@@ -1,5 +1,7 @@
 # simple-netflix-vue
 
+https://ponyma2100.github.io/simplenetflix-vue/
+
 ## Test account
 ```
 Account	: demo@gmail.com
