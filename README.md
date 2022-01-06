@@ -1,5 +1,11 @@
 # simple-netflix-vue
 
+##Test account
+
+Account	: demo@gmail.com
+
+Password : 123123
+
 ## Project setup
 ```
 npm install
