@@ -1,6 +1,6 @@
 # simple-netflix-vue
 
-##Test account
+## Test account
 
 Account	: demo@gmail.com
 
