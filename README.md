@@ -2,6 +2,10 @@
 
 https://ponyma2100.github.io/simplenetflix-vue/
 
+<img src="https://raw.githubusercontent.com/ponyma2100/simplenetflix-vue/master/netflix-1.png" alt="Cover" width="50%"/>
+<img src="https://raw.githubusercontent.com/ponyma2100/simplenetflix-vue/master/netflix-2.png" alt="Cover" width="50%"/>
+<img src="https://raw.githubusercontent.com/ponyma2100/simplenetflix-vue/master/netflix-3.png" alt="Cover" width="50%"/>
+
 ## Test account
 ```
 Account	: demo@gmail.com
